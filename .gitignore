@@ -5,7 +5,7 @@ config.json
 memory.json
 roles.json
 warnings.json
-warnings.json
+custom_commands.json
 
 # Logs
 logs/

@@ -6,7 +6,7 @@ from utils.logger import get_logger
 music_logger = get_logger("music")
 
 YTDL_OPTIONS = {
-    "format": "bestaudio/best",
+    "format": "bestaudio[ext=webm]/bestaudio[ext=m4a]/bestaudio/best",
     "noplaylist": False,
     "nocheckcertificate": True,
     "ignoreerrors": False,
@@ -23,8 +23,15 @@ YTDL_FLAT_OPTIONS = {
 }
 
 FFMPEG_OPTIONS = {
-    "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
-    "options": "-vn",
+    "before_options": (
+        "-reconnect 1 "
+        "-reconnect_streamed 1 "
+        "-reconnect_delay_max 5 "
+        "-bufsize 64k "
+        "-probesize 200k "
+        "-analyzeduration 0"
+    ),
+    "options": "-vn -b:a 128k",
 }
 
 # Stored on ready so the after() callback has a reliable event loop
